@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# Uefa Champions League Draw Simulator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React app to simulate a champions league draw and provide some insight on how the rules work.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+The [UEFA Champions League](https://en.wikipedia.org/wiki/UEFA_Champions_League) is an annual football competition where the top clubs in european football compete to be crowned the champions of europe.
 
-### `npm start`
+During the latter stages of the competition the teams who qualify from the initial group stages are drawn against eachother to end the tournament in a knock-out format, and it is this draw that the app will simulate.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### This app was mostly inspired by the shambles of a draw during the [2021-22 UCL season](https://www.bbc.co.uk/sport/av/football/59644156).
 
-### `npm test`
+## Implementation Plan
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [ ] Create Team class
+  - [ ] Properties: Name, League, Table Position
+  - [ ] Methods/Func: findPossOpponents, drawOpponent
+- [ ] Implement team match rules
+  - [ ] prohibit teams from same group stage
+  - [ ] prohibit teams from same league
+  - [ ] implement seeding i.e. 1st pos vs 2nd pos
+- [ ] Add 2021-22 team data
+- [ ] UI elements for knockout stage visuals
+  - [ ] create tournament tree (how to optimise for different view widths?)
+  - [ ] "stage" for current draw results
+  - [ ] visualise opening of result - animation for opening ball?
+  - [ ] bowl of remaining teams
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
