@@ -14,18 +14,17 @@ During the latter stages of the competition the teams who qualify from the initi
 
 ## Implementation Plan
 
-- [ ] Create Team class
-  - [ ] Properties: Name, League, Table Position
-  - [ ] Methods/Func: findPossOpponents, drawOpponent
-- [ ] Implement team match rules
-  - [ ] prohibit teams from same group stage
-  - [ ] prohibit teams from same league
-  - [ ] implement seeding i.e. 1st pos vs 2nd pos
-- [ ] Add 2021-22 team data
-- [ ] UI elements for knockout stage visuals
-  - [ ] create tournament tree (how to optimise for different view widths?)
-  - [ ] "stage" for current draw results
-  - [ ] visualise opening of result - animation for opening ball?
-  - [ ] bowl of remaining teams
-
-
+-   [x] Create Team class
+    -   [x] Properties: Name, League, Table Position
+    -   [x] Methods/Func: findPossOpponents, drawOpponent
+-   [x] Implement team match rules
+    -   [x] prohibit teams from same group stage
+    -   [x] prohibit teams from same league
+    -   [x] implement seeding i.e. 1st pos vs 2nd pos
+    -   [ ] implement edge case to handle only one possible fixture for team
+-   [x] Add 2021-22 team data
+-   [ ] UI elements for knockout stage visuals
+    -   [ ] create tournament tree (how to optimise for different view widths?)
+    -   [ ] "stage" for current draw results
+    -   [ ] visualise opening of result - animation for opening ball?
+    -   [ ] bowl of remaining teams
