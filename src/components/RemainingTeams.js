@@ -1,10 +1,13 @@
 const RemainingTeams = (props) => {
     return (
-        <ul>
-            {props.remainingTeams.map((team) => (
-                <ul key={team.name}>{team.name}</ul>
-            ))}
-        </ul>
+        <>
+            <h2>Remaining Teams:</h2>
+            <ul>
+                {props.remainingTeams.map((team) => (
+                    <li key={team.name}>{team.name}</li>
+                ))}
+            </ul>
+        </>
     );
 };
 

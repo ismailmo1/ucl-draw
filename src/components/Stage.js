@@ -13,9 +13,14 @@ const Stage = (props) => {
 
     const drawAwayTeamHandler = () => {
         const awayTeam = drawAwayTeam(homeTeam, props.remainingTeams);
-
         setAwayTeam(awayTeam);
         props.onTeamDraw(awayTeam);
+        props.onFixtureDraw(homeTeam, awayTeam);
+    };
+
+    const resetTeamsHandler = () => {
+        setAwayTeam(null);
+        setHomeTeam(null);
     };
     return (
         <>
@@ -26,18 +31,19 @@ const Stage = (props) => {
             </div>
 
             <div>
-                <button
-                    disabled={homeTeam ? true : false}
-                    onClick={drawHomeTeamHandler}
-                >
-                    Draw Home Team
-                </button>
-                <button
-                    disabled={homeTeam ? (awayTeam ? true : false) : false}
-                    onClick={drawAwayTeamHandler}
-                >
-                    Draw Away Team
-                </button>
+                {!homeTeam && (
+                    <button onClick={drawHomeTeamHandler}>
+                        Draw Home Team
+                    </button>
+                )}
+                {homeTeam && !awayTeam && (
+                    <button onClick={drawAwayTeamHandler}>
+                        Draw Away Team
+                    </button>
+                )}
+                {homeTeam && awayTeam && (
+                    <button onClick={resetTeamsHandler}>Next Draw</button>
+                )}
             </div>
         </>
     );
