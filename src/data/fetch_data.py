@@ -24,7 +24,7 @@ group_data = call_api(
     "https://v3.football.api-sports.io/standings?league=2&season=2021"
 )
 
-group_standings = group_data["response"][0]["league"]["standings"][0]
+group_standings = group_data["response"][0]["league"]["standings"]
 
 
 # dump to file
