@@ -9,6 +9,7 @@ const Stage = (props) => {
         const homeTeam = drawHomeTeam(props.remainingTeams);
         setHomeTeam(homeTeam);
         props.onTeamDraw(homeTeam);
+        props.onHomeDraw(homeTeam);
     };
 
     const drawAwayTeamHandler = () => {

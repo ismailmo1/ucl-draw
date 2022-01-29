@@ -1,0 +1,8 @@
+body {
+    background-color: rgb(8, 5, 133);
+    color: white;
+    max-height: 100vh;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+}

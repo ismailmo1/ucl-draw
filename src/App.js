@@ -7,6 +7,7 @@ import allTeams from "./utils/teamData";
 function App() {
     const [remainingTeams, setRemainingTeams] = useState(allTeams);
     const [fixtures, setFixtures] = useState([]);
+    const [validTeams, setValidTeams] = useState(allTeams);
 
     const teamDrawHandler = (drawnTeam) => {
         setRemainingTeams((remainingTeams) =>
@@ -19,24 +20,38 @@ function App() {
             ...prevFixtures,
             { home: homeTeam, away: awayTeam },
         ]);
+        setValidTeams(allTeams);
+    };
+
+    const homeDrawHandler = (team) => {
+        const teams = team.calcValidTeams(remainingTeams);
+        setValidTeams(teams);
+    };
+
+    const restartHandler = () => {
+        setFixtures([]);
+        setRemainingTeams(allTeams);
     };
 
     return (
         <>
-            <h1 style={{ display: "flex", justifyContent: "center" }}>
-                UCL DRAW SIMULATOR
-            </h1>
+            <h1>UCL DRAW SIMULATOR</h1>
             {remainingTeams.length > 0 && (
                 <>
-                    <RemainingTeams remainingTeams={remainingTeams} />
+                    <RemainingTeams
+                        remainingTeams={remainingTeams}
+                        validTeams={validTeams}
+                    />
                     <Stage
                         remainingTeams={remainingTeams}
                         onTeamDraw={teamDrawHandler}
+                        onHomeDraw={homeDrawHandler}
                         onFixtureDraw={createFixtureHandler}
                     />
                 </>
             )}
             <Fixtures fixtures={fixtures} />
+            <button onClick={restartHandler}>Restart</button>
         </>
     );
 }
