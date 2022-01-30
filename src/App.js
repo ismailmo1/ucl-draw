@@ -1,57 +1,91 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import Fixtures from "./components/Fixtures";
 import RemainingTeams from "./components/RemainingTeams";
 import Stage from "./components/Stage";
 import allTeams from "./utils/teamData";
 
-function App() {
-    const [remainingTeams, setRemainingTeams] = useState(allTeams);
-    const [fixtures, setFixtures] = useState([]);
-    const [validTeams, setValidTeams] = useState(allTeams);
+const teamReducer = (state, action) => {
+    // state: {team:name of drawn team, remainingTeams:list of team objs left in draw,
+    //          forcedDraws:team objs that only have one possible matchup}
+    let updatedTeams;
+    let updatedForcedDraws;
+    switch (action.type) {
+        case "homeDraw":
+            updatedForcedDraws = { ...state.forcedDraws };
+            updatedTeams = [...state.remainingTeams];
 
-    const teamDrawHandler = (drawnTeam) => {
-        setRemainingTeams((remainingTeams) =>
-            remainingTeams.filter((team) => drawnTeam.name !== team.name)
-        );
-    };
+            // update teams' validTeams
+            updatedTeams.forEach((team) => {
+                team.validTeams = team.calcValidTeams(updatedTeams);
+                if (team.validTeams.length === 1) {
+                    // add both sets of teams to forced draws state
+                    const forcedTeam = team.validTeams[0];
+                    updatedForcedDraws[team.name] = forcedTeam.name;
+                    updatedForcedDraws[forcedTeam.name] = team.name;
+                }
+            });
+            return {
+                ...state,
+                remainingTeams: updatedTeams,
+                forcedDraws: updatedForcedDraws,
+            };
+        case "awayDraw":
+            updatedTeams = state.remainingTeams.filter(
+                (team) =>
+                    team.name !== action.homeTeam.name &&
+                    team.name !== action.awayTeam.name
+            );
+            return {
+                ...state,
+                remainingTeams: updatedTeams,
+            };
+        case "reset":
+            return { remainingTeams: allTeams, forcedDraws: {} };
+        default:
+            throw new Error();
+    }
+};
+function App() {
+    const [teamState, dispatch] = useReducer(teamReducer, {
+        remainingTeams: allTeams,
+        forcedDraws: {},
+    });
+    const [fixtures, setFixtures] = useState([]);
 
     const createFixtureHandler = (homeTeam, awayTeam) => {
         setFixtures((prevFixtures) => [
             ...prevFixtures,
             { home: homeTeam, away: awayTeam },
         ]);
-        setValidTeams(allTeams);
+        dispatch({ type: "awayDraw", homeTeam: homeTeam, awayTeam: awayTeam });
     };
 
     const homeDrawHandler = (team) => {
-        const teams = team.calcValidTeams(remainingTeams);
-        setValidTeams(teams);
+        dispatch({ type: "homeDraw", team: team });
     };
 
     const restartHandler = () => {
         setFixtures([]);
-        setRemainingTeams(allTeams);
+        dispatch({ type: "reset" });
     };
 
     return (
         <>
             <h1>UCL DRAW SIMULATOR</h1>
-            {remainingTeams.length > 0 && (
+            {
                 <>
-                    <RemainingTeams
-                        remainingTeams={remainingTeams}
-                        validTeams={validTeams}
-                    />
+                    <RemainingTeams remainingTeams={teamState.remainingTeams} />
                     <Stage
-                        remainingTeams={remainingTeams}
-                        onTeamDraw={teamDrawHandler}
+                        teams={teamState}
                         onHomeDraw={homeDrawHandler}
                         onFixtureDraw={createFixtureHandler}
                     />
                 </>
-            )}
+            }
             <Fixtures fixtures={fixtures} />
-            <button onClick={restartHandler}>Restart</button>
+            {teamState.remainingTeams.length === 0 && (
+                <button onClick={restartHandler}>Restart</button>
+            )}
         </>
     );
 }
