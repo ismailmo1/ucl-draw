@@ -6,16 +6,27 @@ const Stage = (props) => {
     const [awayTeam, setAwayTeam] = useState(null);
 
     const drawHomeTeamHandler = () => {
-        const homeTeam = drawHomeTeam(props.remainingTeams);
+        const homeTeam = drawHomeTeam(props.teams.remainingTeams);
         setHomeTeam(homeTeam);
-        props.onTeamDraw(homeTeam);
         props.onHomeDraw(homeTeam);
     };
 
     const drawAwayTeamHandler = () => {
-        const awayTeam = drawAwayTeam(homeTeam, props.remainingTeams);
+        let awayTeam = drawAwayTeam(homeTeam, props.teams.remainingTeams);
+        // check forced draws for home team
+        if (props.teams.forcedDraws.hasOwnProperty(homeTeam.name)) {
+            awayTeam = props.teams.forcedDraws[homeTeam.name];
+        }
+
+        // check forced draws for away team
+        while (
+            props.teams.forcedDraws.hasOwnProperty(awayTeam.name) &&
+            props.teams.forcedDraws[awayTeam.name] !== homeTeam.name
+        ) {
+            // keep searching new away team if home team is not forced draw
+            awayTeam = drawAwayTeam(homeTeam, props.teams.remainingTeams);
+        }
         setAwayTeam(awayTeam);
-        props.onTeamDraw(awayTeam);
         props.onFixtureDraw(homeTeam, awayTeam);
     };
 
