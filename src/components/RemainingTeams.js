@@ -12,7 +12,7 @@ const RemainingTeams = (props) => {
                         // }
                         key={team.name}
                     >
-                        {team.name}
+                        {team.name} -{" "}
                     </li>
                 ))}
             </ul>

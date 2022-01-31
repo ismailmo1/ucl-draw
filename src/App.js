@@ -1,6 +1,5 @@
 import { useReducer, useState } from "react";
 import Fixtures from "./components/Fixtures";
-import RemainingTeams from "./components/RemainingTeams";
 import Stage from "./components/Stage";
 import allTeams from "./utils/teamData";
 
@@ -72,16 +71,13 @@ function App() {
     return (
         <>
             <h1>UCL DRAW SIMULATOR</h1>
-            {
-                <>
-                    <RemainingTeams remainingTeams={teamState.remainingTeams} />
-                    <Stage
-                        teams={teamState}
-                        onHomeDraw={homeDrawHandler}
-                        onFixtureDraw={createFixtureHandler}
-                    />
-                </>
-            }
+            {teamState.remainingTeams.length > 0 && (
+                <Stage
+                    teamState={teamState}
+                    onHomeDraw={homeDrawHandler}
+                    onFixtureDraw={createFixtureHandler}
+                />
+            )}
             <Fixtures fixtures={fixtures} />
             {teamState.remainingTeams.length === 0 && (
                 <button onClick={restartHandler}>Restart</button>

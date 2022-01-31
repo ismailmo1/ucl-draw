@@ -1,62 +1,36 @@
 import { useState } from "react";
-import { drawAwayTeam, drawHomeTeam } from "../utils/drawTeam";
+import CurrentDraw from "./CurrentDraw";
+import RemainingTeams from "./RemainingTeams";
 
 const Stage = (props) => {
     const [homeTeam, setHomeTeam] = useState(null);
     const [awayTeam, setAwayTeam] = useState(null);
 
-    const drawHomeTeamHandler = () => {
-        const homeTeam = drawHomeTeam(props.teams.remainingTeams);
-        setHomeTeam(homeTeam);
+    const homeDrawHandler = (homeTeam) => {
         props.onHomeDraw(homeTeam);
+        setHomeTeam(homeTeam);
     };
 
-    const drawAwayTeamHandler = () => {
-        let awayTeam = drawAwayTeam(homeTeam, props.teams.remainingTeams);
-        // check forced draws for home team
-        if (props.teams.forcedDraws.hasOwnProperty(homeTeam.name)) {
-            awayTeam = props.teams.forcedDraws[homeTeam.name];
-        }
-
-        // check forced draws for away team
-        while (
-            props.teams.forcedDraws.hasOwnProperty(awayTeam.name) &&
-            props.teams.forcedDraws[awayTeam.name] !== homeTeam.name
-        ) {
-            // keep searching new away team if home team is not forced draw
-            awayTeam = drawAwayTeam(homeTeam, props.teams.remainingTeams);
-        }
-        setAwayTeam(awayTeam);
+    const fixtureDrawHandler = (homeTeam, awayTeam) => {
         props.onFixtureDraw(homeTeam, awayTeam);
+        setAwayTeam(awayTeam);
     };
 
-    const resetTeamsHandler = () => {
-        setAwayTeam(null);
+    const resetHandler = () => {
         setHomeTeam(null);
+        setAwayTeam(null);
     };
     return (
         <>
-            <div>
-                Home Team: {homeTeam ? homeTeam.name : ""}
-                <br />
-                Away Team: {awayTeam ? awayTeam.name : ""}
-            </div>
-
-            <div>
-                {!homeTeam && (
-                    <button onClick={drawHomeTeamHandler}>
-                        Draw Home Team
-                    </button>
-                )}
-                {homeTeam && !awayTeam && (
-                    <button onClick={drawAwayTeamHandler}>
-                        Draw Away Team
-                    </button>
-                )}
-                {homeTeam && awayTeam && (
-                    <button onClick={resetTeamsHandler}>Next Draw</button>
-                )}
-            </div>
+            <RemainingTeams remainingTeams={props.teamState.remainingTeams} />
+            <CurrentDraw
+                teams={props.teamState}
+                onHomeDraw={homeDrawHandler}
+                currHomeTeam={homeTeam}
+                currAwayTeam={awayTeam}
+                onFixtureDraw={fixtureDrawHandler}
+                onReset={resetHandler}
+            />
         </>
     );
 };
