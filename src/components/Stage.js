@@ -22,7 +22,10 @@ const Stage = (props) => {
     };
     return (
         <>
-            <RemainingTeams remainingTeams={props.teamState.remainingTeams} />
+            <RemainingTeams
+                remainingTeams={props.teamState.remainingTeams}
+                homeTeam={homeTeam}
+            />
             <CurrentDraw
                 teams={props.teamState}
                 onHomeDraw={homeDrawHandler}
