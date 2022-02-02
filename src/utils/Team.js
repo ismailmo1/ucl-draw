@@ -7,20 +7,26 @@ export default class Team {
     }
 
     validateDraw(team) {
-        // return true if draw betweem teams is valid
+        // return dict of reasons for team validity/invalidity
         const isSameLeague = this.league === team.league;
         const isSameGroup = this.group === team.group;
         const isSamePosition = this.finalPosition === team.finalPosition;
-        return !isSameGroup && !isSamePosition && !isSameLeague;
+        const isValid = !isSameGroup && !isSameLeague && !isSamePosition;
+        return {
+            isValid: isValid,
+            sameGroup: isSameGroup,
+            samePosition: isSamePosition,
+            sameLeague: isSameLeague,
+        };
     }
 
-    calcValidTeams(remainingTeams) {
-        const validTeams = [];
+    calcValidity(remainingTeams) {
+        // add  validreason property to remaining teams
+        // mutating object in function === side effects (this is a bad idea i think?)
+        // need to change this behaviour
         remainingTeams.forEach((team) => {
-            if (this.validateDraw(team)) {
-                validTeams.push(team);
-            }
+            const validReasons = this.validateDraw(team);
+            team.validReasons = validReasons;
         });
-        return validTeams;
     }
 }

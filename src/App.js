@@ -15,7 +15,10 @@ const teamReducer = (state, action) => {
 
             // update teams' validTeams
             updatedTeams.forEach((team) => {
-                team.validTeams = team.calcValidTeams(updatedTeams);
+                team.calcValidity(updatedTeams);
+                team.validTeams = updatedTeams.filter(
+                    (team) => team.validReasons.isValid
+                );
                 if (team.validTeams.length === 1) {
                     // add both sets of teams to forced draws state
                     const forcedTeam = team.validTeams[0];

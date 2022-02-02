@@ -5,7 +5,11 @@ const drawHomeTeam = (remainingTeams) => {
 };
 
 const drawAwayTeam = (homeTeam, remainingTeams) => {
-    const validTeams = homeTeam.calcValidTeams(remainingTeams);
+    homeTeam.calcValidity(remainingTeams);
+    const validTeams = remainingTeams.filter(
+        (team) => team.validReasons.isValid
+    );
+    console.log(validTeams);
     const randDrawIdx = Math.floor(Math.random() * validTeams.length);
     return validTeams[randDrawIdx];
 };
