@@ -28,7 +28,6 @@ const teamReducer = (state, action) => {
                     updatedForcedDraws[forcedTeam.name] = team.name;
                 }
             });
-            console.log(state.forcedDraws);
             return {
                 ...state,
                 remainingTeams: updatedTeams,

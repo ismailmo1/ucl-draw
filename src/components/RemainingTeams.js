@@ -18,13 +18,13 @@ const RemainingTeams = (props) => {
 
     return (
         <>
-            <h2>Remaining Teams:</h2>
             <Grid
                 container
                 spacing={2}
                 direction="row"
                 justifyContent="center"
                 alignItems="center"
+                sx={{ marginTop: "10px" }}
             >
                 {props.remainingTeams.map((team) => (
                     <Grid item xs={6} md={1} key={team.name}>

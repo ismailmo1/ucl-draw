@@ -12,13 +12,15 @@ GroupData.forEach((group) => {
         const league = TeamData[team.team.id].team.country;
         const badgeImg = team.team.logo;
         const stadiumImg = TeamData[team.team.id].venue.image;
+        const stadiumName = TeamData[team.team.id].venue.name;
         const teamObj = new Team(
             name,
             league,
             finalPosition,
             group,
             badgeImg,
-            stadiumImg
+            stadiumImg,
+            stadiumName
         );
         allTeams.push(teamObj);
     });

@@ -13,6 +13,7 @@ const TeamCard = (props) => {
                 color: "white",
                 fontSize: "100%",
                 textAlign: "center",
+                margin: "5px",
             }}
         >
             <CardMedia

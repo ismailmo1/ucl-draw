@@ -49,29 +49,50 @@ const CurrentDraw = (props) => {
                         rgba(0, 0, 0, 0.5),
                         rgba(0, 0, 0, 0.5)
                         ),url(${
-                            props.currHomeTeam && props.currHomeTeam.stadium
+                            props.currHomeTeam && props.currHomeTeam.stadiumImg
                         })`,
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
                         backgroundSize: "cover",
                         color: "white",
-                        height: "200px",
+                        height: "250px",
                     }}
                 >
-                    <TeamCard height="100" team={props.currHomeTeam}>
-                        {props.currHomeTeam
-                            ? props.currHomeTeam.name
-                            : "Home Team"}
-                    </TeamCard>
-
-                    <div style={{ margin: "20px" }}>V</div>
-                    <TeamCard height="100" team={props.currAwayTeam}>
-                        {props.currAwayTeam
-                            ? props.currAwayTeam.name
-                            : "Away Team"}
-                    </TeamCard>
+                    <Grid container justifyContent="center" alignItems="center">
+                        <Grid item xs={5}>
+                            <TeamCard height="100" team={props.currHomeTeam}>
+                                {props.currHomeTeam
+                                    ? props.currHomeTeam.name.toUpperCase()
+                                    : "Home Team".toUpperCase()}
+                            </TeamCard>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <div
+                                style={{ margin: "20px", textAlign: "center" }}
+                            >
+                                V
+                            </div>
+                        </Grid>
+                        <Grid item xs={5}>
+                            <TeamCard height="100" team={props.currAwayTeam}>
+                                {props.currAwayTeam
+                                    ? props.currAwayTeam.name.toUpperCase()
+                                    : "Away Team".toUpperCase()}
+                            </TeamCard>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <div
+                                style={{ margin: "20px", textAlign: "center" }}
+                            >
+                                {props.currHomeTeam
+                                    ? props.currHomeTeam.stadiumName
+                                    : "Stadium"}
+                            </div>
+                        </Grid>
+                    </Grid>
                 </Card>
             </Grid>
+
             <Grid item xs={12}>
                 <ButtonGroup variant="contained" fullWidth={true}>
                     <Button
