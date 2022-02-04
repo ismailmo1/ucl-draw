@@ -1,6 +1,7 @@
 import { useReducer, useState } from "react";
 import Fixtures from "./components/Fixtures";
 import Stage from "./components/Stage";
+import styles from "./index.module.css";
 import allTeams from "./utils/teamData";
 
 const teamReducer = (state, action) => {
@@ -73,6 +74,8 @@ function App() {
 
     return (
         <>
+            <div className={styles.overlay}></div>
+
             <h1>UCL DRAW SIMULATOR</h1>
             {teamState.remainingTeams.length > 0 && (
                 <Stage

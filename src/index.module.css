@@ -1,7 +1,15 @@
 body {
-    background-color: rgb(8, 5, 133);
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.75),
+            rgba(0, 0, 0, 0.75)
+        ),
+        url("../public/xdrd0u2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     color: white;
-    max-height: 100vh;
+    height: 100vh;
     font-family: sans-serif;
     display: flex;
     justify-content: center;
