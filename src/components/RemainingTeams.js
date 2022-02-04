@@ -1,9 +1,8 @@
 import styles from "./RemainingTeams.module.css";
+import TeamCard from "./TeamCard";
 
 const RemainingTeams = (props) => {
-    let teams;
     let validTeams;
-    let invalidTeams;
     let validTeamNames;
     if (props.homeTeam) {
         // add validreason property
@@ -11,12 +10,9 @@ const RemainingTeams = (props) => {
         validTeams = props.remainingTeams.filter(
             (team) => team.validReasons.isValid
         );
-        invalidTeams = props.remainingTeams.filter(
-            (team) => !team.validReasons.isValid
-        );
+
         validTeamNames = validTeams.map((team) => team.name);
     }
-    console.log(teams, props.remainingTeams);
     const reasonReducer = (reasons, reason) => {
         const invalidReason = reason[1];
         return invalidReason ? reasons + " " + reason[0] : reasons;
@@ -34,7 +30,7 @@ const RemainingTeams = (props) => {
                         }
                         key={team.name}
                     >
-                        {team.name} -
+                        <TeamCard team={team} />
                         {team.validReasons && !team.validReasons.isValid
                             ? Object.entries(team.validReasons).reduce(
                                   reasonReducer,

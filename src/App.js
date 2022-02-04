@@ -1,3 +1,4 @@
+import Button from "@mui/material/Button";
 import { useReducer, useState } from "react";
 import Fixtures from "./components/Fixtures";
 import Stage from "./components/Stage";
@@ -27,6 +28,7 @@ const teamReducer = (state, action) => {
                     updatedForcedDraws[forcedTeam.name] = team.name;
                 }
             });
+            console.log(state.forcedDraws);
             return {
                 ...state,
                 remainingTeams: updatedTeams,
@@ -86,7 +88,9 @@ function App() {
             )}
             <Fixtures fixtures={fixtures} />
             {teamState.remainingTeams.length === 0 && (
-                <button onClick={restartHandler}>Restart</button>
+                <Button variant="contained" onClick={restartHandler}>
+                    Restart
+                </Button>
             )}
         </>
     );

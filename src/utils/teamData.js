@@ -10,7 +10,16 @@ GroupData.forEach((group) => {
         const group = team.group;
         const finalPosition = team.rank;
         const league = TeamData[team.team.id].team.country;
-        const teamObj = new Team(name, league, finalPosition, group);
+        const badgeImg = team.team.logo;
+        const stadiumImg = TeamData[team.team.id].venue.image;
+        const teamObj = new Team(
+            name,
+            league,
+            finalPosition,
+            group,
+            badgeImg,
+            stadiumImg
+        );
         allTeams.push(teamObj);
     });
 });

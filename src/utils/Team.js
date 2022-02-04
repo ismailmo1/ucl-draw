@@ -1,9 +1,11 @@
 export default class Team {
-    constructor(name, league, finalPosition, group) {
+    constructor(name, league, finalPosition, group, badge, stadium) {
         this.name = name;
         this.league = league;
         this.finalPosition = finalPosition;
         this.group = group;
+        this.badge = badge;
+        this.stadium = stadium;
     }
 
     validateDraw(team) {

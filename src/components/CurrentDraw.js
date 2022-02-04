@@ -1,5 +1,7 @@
+import { ButtonGroup, Card } from "@mui/material";
+import Button from "@mui/material/Button";
 import { drawAwayTeam, drawHomeTeam } from "../utils/drawTeam";
-
+import TeamCard from "./TeamCard";
 const CurrentDraw = (props) => {
     const drawHomeTeamHandler = () => {
         const homeTeam = drawHomeTeam(props.teams.remainingTeams);
@@ -36,27 +38,58 @@ const CurrentDraw = (props) => {
 
     return (
         <>
-            <div>
-                Home Team: {props.currHomeTeam ? props.currHomeTeam.name : ""}
-                <br />
-                Away Team: {props.currAwayTeam ? props.currAwayTeam.name : ""}
-            </div>
+            <Card
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    background: `linear-gradient(
+                        180deg,
+                        rgba(0, 0, 0, 0.5),
+                        rgba(0, 0, 0, 0.5)
+                        ),url(${
+                            props.currHomeTeam && props.currHomeTeam.stadium
+                        })`,
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    color: "white",
+                }}
+            >
+                {props.currHomeTeam ? (
+                    <TeamCard team={props.currHomeTeam} />
+                ) : (
+                    ""
+                )}
+                <div>vs</div>
+                {props.currAwayTeam ? (
+                    <TeamCard team={props.currAwayTeam} />
+                ) : (
+                    ""
+                )}
+            </Card>
 
-            <div>
-                {!props.currHomeTeam && (
-                    <button onClick={drawHomeTeamHandler}>
-                        Draw Home Team
-                    </button>
-                )}
-                {props.currHomeTeam && !props.currAwayTeam && (
-                    <button onClick={drawAwayTeamHandler}>
-                        Draw Away Team
-                    </button>
-                )}
-                {props.currHomeTeam && props.currAwayTeam && (
-                    <button onClick={props.onReset}>Next Draw</button>
-                )}
-            </div>
+            <ButtonGroup variant="contained">
+                <Button
+                    disabled={!!props.currHomeTeam}
+                    onClick={drawHomeTeamHandler}
+                >
+                    Draw Home Team
+                </Button>
+
+                <Button
+                    disabled={!(props.currHomeTeam && !props.currAwayTeam)}
+                    onClick={drawAwayTeamHandler}
+                >
+                    Draw Away Team
+                </Button>
+
+                <Button
+                    disabled={!(props.currHomeTeam && props.currAwayTeam)}
+                    onClick={props.onReset}
+                >
+                    Next Draw
+                </Button>
+            </ButtonGroup>
         </>
     );
 };
