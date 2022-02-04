@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia } from "@mui/material";
+import { Card, CardContent, CardMedia, Grid } from "@mui/material";
 
 const TeamCard = (props) => {
     return (
@@ -8,17 +8,31 @@ const TeamCard = (props) => {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: "rgba(0,0,0,0.1)",
+                boxShadow: "none",
+                backgroundColor: "rgba(0,0,0,0)",
                 color: "white",
+                fontSize: "100%",
+                textAlign: "center",
             }}
         >
             <CardMedia
                 component="img"
-                src={props.team.badge}
-                height="100"
-                sx={{ width: "auto" }}
+                src={props.team ? props.team.badge : "/badge.png"}
+                height={props.height}
+                sx={{
+                    width: "auto",
+                    filter: props.invalid ? "grayscale(100%)" : "",
+                }}
             />
-            <CardContent>{props.team.name.toUpperCase()}</CardContent>
+            {props.children && (
+                <CardContent>
+                    <Grid container justifyContent="center" alignItems="center">
+                        <Grid item xs={12}>
+                            <div>{props.children}</div>
+                        </Grid>
+                    </Grid>
+                </CardContent>
+            )}
         </Card>
     );
 };

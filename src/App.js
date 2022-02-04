@@ -1,4 +1,4 @@
-import Button from "@mui/material/Button";
+import { Button, Grid } from "@mui/material";
 import { useReducer, useState } from "react";
 import Fixtures from "./components/Fixtures";
 import Stage from "./components/Stage";
@@ -77,21 +77,30 @@ function App() {
     return (
         <>
             <div className={styles.overlay}></div>
-
-            <h1>UCL DRAW SIMULATOR</h1>
-            {teamState.remainingTeams.length > 0 && (
-                <Stage
-                    teamState={teamState}
-                    onHomeDraw={homeDrawHandler}
-                    onFixtureDraw={createFixtureHandler}
-                />
-            )}
-            <Fixtures fixtures={fixtures} />
-            {teamState.remainingTeams.length === 0 && (
-                <Button variant="contained" onClick={restartHandler}>
-                    Restart
-                </Button>
-            )}
+            <Grid
+                container
+                justifyContent="center"
+                sx={{ maxWidth: "75%", mx: "auto" }}
+            >
+                <Grid item>
+                    <h1>UCL DRAW SIMULATOR</h1>
+                </Grid>
+                <Grid item xs={12}>
+                    {teamState.remainingTeams.length > 0 && (
+                        <Stage
+                            teamState={teamState}
+                            onHomeDraw={homeDrawHandler}
+                            onFixtureDraw={createFixtureHandler}
+                        />
+                    )}
+                    <Fixtures fixtures={fixtures} />
+                    {teamState.remainingTeams.length === 0 && (
+                        <Button variant="contained" onClick={restartHandler}>
+                            Restart
+                        </Button>
+                    )}
+                </Grid>
+            </Grid>
         </>
     );
 }

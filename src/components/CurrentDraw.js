@@ -1,5 +1,5 @@
-import { ButtonGroup, Card } from "@mui/material";
-import Button from "@mui/material/Button";
+import HomeIcon from "@mui/icons-material/Home";
+import { Button, ButtonGroup, Card, Grid } from "@mui/material";
 import { drawAwayTeam, drawHomeTeam } from "../utils/drawTeam";
 import TeamCard from "./TeamCard";
 const CurrentDraw = (props) => {
@@ -37,60 +37,67 @@ const CurrentDraw = (props) => {
     };
 
     return (
-        <>
-            <Card
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    background: `linear-gradient(
+        <Grid container justifyContent="center" alignItems="center">
+            <Grid item xs={12}>
+                <Card
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        background: `linear-gradient(
                         180deg,
                         rgba(0, 0, 0, 0.5),
                         rgba(0, 0, 0, 0.5)
                         ),url(${
                             props.currHomeTeam && props.currHomeTeam.stadium
                         })`,
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    color: "white",
-                }}
-            >
-                {props.currHomeTeam ? (
-                    <TeamCard team={props.currHomeTeam} />
-                ) : (
-                    ""
-                )}
-                <div>vs</div>
-                {props.currAwayTeam ? (
-                    <TeamCard team={props.currAwayTeam} />
-                ) : (
-                    ""
-                )}
-            </Card>
-
-            <ButtonGroup variant="contained">
-                <Button
-                    disabled={!!props.currHomeTeam}
-                    onClick={drawHomeTeamHandler}
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                        color: "white",
+                        height: "200px",
+                    }}
                 >
-                    Draw Home Team
-                </Button>
+                    <TeamCard height="100" team={props.currHomeTeam}>
+                        {props.currHomeTeam
+                            ? props.currHomeTeam.name
+                            : "Home Team"}
+                    </TeamCard>
 
-                <Button
-                    disabled={!(props.currHomeTeam && !props.currAwayTeam)}
-                    onClick={drawAwayTeamHandler}
-                >
-                    Draw Away Team
-                </Button>
+                    <div style={{ margin: "20px" }}>V</div>
+                    <TeamCard height="100" team={props.currAwayTeam}>
+                        {props.currAwayTeam
+                            ? props.currAwayTeam.name
+                            : "Away Team"}
+                    </TeamCard>
+                </Card>
+            </Grid>
+            <Grid item xs={12}>
+                <ButtonGroup variant="contained" fullWidth={true}>
+                    <Button
+                        disabled={!!props.currHomeTeam}
+                        onClick={drawHomeTeamHandler}
+                    >
+                        <HomeIcon />
+                        Draw Home Team
+                    </Button>
 
-                <Button
-                    disabled={!(props.currHomeTeam && props.currAwayTeam)}
-                    onClick={props.onReset}
-                >
-                    Next Draw
-                </Button>
-            </ButtonGroup>
-        </>
+                    <Button
+                        disabled={!(props.currHomeTeam && !props.currAwayTeam)}
+                        onClick={drawAwayTeamHandler}
+                    >
+                        Draw Away Team
+                    </Button>
+
+                    <Button
+                        disabled={!(props.currHomeTeam && props.currAwayTeam)}
+                        onClick={props.onReset}
+                    >
+                        Next Draw
+                    </Button>
+                </ButtonGroup>
+            </Grid>
+        </Grid>
     );
 };
 

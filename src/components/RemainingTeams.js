@@ -1,4 +1,6 @@
-import styles from "./RemainingTeams.module.css";
+import GppBadIcon from "@mui/icons-material/GppBad";
+import GppGoodIcon from "@mui/icons-material/GppGood";
+import { Grid, Tooltip } from "@mui/material";
 import TeamCard from "./TeamCard";
 
 const RemainingTeams = (props) => {
@@ -13,33 +15,39 @@ const RemainingTeams = (props) => {
 
         validTeamNames = validTeams.map((team) => team.name);
     }
-    const reasonReducer = (reasons, reason) => {
-        const invalidReason = reason[1];
-        return invalidReason ? reasons + " " + reason[0] : reasons;
-    };
+
     return (
         <>
             <h2>Remaining Teams:</h2>
-            <ul>
+            <Grid
+                container
+                spacing={2}
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+            >
                 {props.remainingTeams.map((team) => (
-                    <li
-                        className={
-                            validTeams && validTeamNames.indexOf(team.name) < 0
-                                ? styles.invalid
-                                : ""
-                        }
-                        key={team.name}
-                    >
-                        <TeamCard team={team} />
-                        {team.validReasons && !team.validReasons.isValid
-                            ? Object.entries(team.validReasons).reduce(
-                                  reasonReducer,
-                                  ""
-                              )
-                            : ""}
-                    </li>
+                    <Grid item xs={6} md={1} key={team.name}>
+                        <TeamCard
+                            invalid={
+                                validTeams &&
+                                validTeamNames.indexOf(team.name) < 0
+                            }
+                            height="50"
+                            team={team}
+                        >
+                            <Tooltip title={team.name}>
+                                {team.validReasons &&
+                                !team.validReasons.isValid ? (
+                                    <GppBadIcon />
+                                ) : (
+                                    <GppGoodIcon />
+                                )}
+                            </Tooltip>
+                        </TeamCard>
+                    </Grid>
                 ))}
-            </ul>
+            </Grid>
         </>
     );
 };
