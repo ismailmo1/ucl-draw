@@ -1,10 +1,10 @@
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { Button, Grid } from "@mui/material";
 import { useReducer, useState } from "react";
 import Fixtures from "./components/Fixtures";
 import Stage from "./components/Stage";
 import styles from "./index.module.css";
-import allTeams from "./utils/teamData";
-
+import { default as allTeams, loadTeamData } from "./utils/teamData";
 const teamReducer = (state, action) => {
     // state: {team:name of drawn team, remainingTeams:list of team objs left in draw,
     //          forcedDraws:team objs that only have one possible matchup}
@@ -44,7 +44,7 @@ const teamReducer = (state, action) => {
                 remainingTeams: updatedTeams,
             };
         case "reset":
-            return { remainingTeams: allTeams, forcedDraws: {} };
+            return { remainingTeams: loadTeamData(), forcedDraws: {} };
         default:
             throw new Error();
     }
@@ -84,7 +84,7 @@ function App() {
                 <Grid item>
                     <h1>UCL DRAW SIMULATOR</h1>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid container xs={12} justifyContent="center">
                     {teamState.remainingTeams.length > 0 && (
                         <Stage
                             teamState={teamState}
@@ -92,10 +92,14 @@ function App() {
                             onFixtureDraw={createFixtureHandler}
                         />
                     )}
-                    <Fixtures fixtures={fixtures} />
+                    <Grid item xs={12}>
+                        <Fixtures fixtures={fixtures} />
+                    </Grid>
                     {teamState.remainingTeams.length === 0 && (
-                        <Button variant="contained" onClick={restartHandler}>
-                            Restart
+                        <Button variant="text" onClick={restartHandler}>
+                            <RestartAltIcon
+                                sx={{ color: "white", fontSize: "50px" }}
+                            />
                         </Button>
                     )}
                 </Grid>

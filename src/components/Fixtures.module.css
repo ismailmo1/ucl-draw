@@ -1,0 +1,16 @@
+.fixtureEnter {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+.fixtureEnterActive {
+    opacity: 1;
+    transform: translateY(0%);
+    transition: all 500ms ease-in;
+}
+.fixtureExit {
+    opacity: 1;
+}
+.fixtureExitActive {
+    opacity: 0;
+    transition: all 500ms ease-in;
+}

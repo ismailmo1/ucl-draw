@@ -1,0 +1,17 @@
+.teamBadgeEnter {
+    opacity: 0;
+    transform: scale(0.9);
+}
+.teamBadgeEnterActive {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 500ms, transform 500ms;
+}
+.teamBadgeExit {
+    opacity: 1;
+}
+.teamBadgeExitActive {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 500ms, transform 500ms;
+}

@@ -2,6 +2,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import { Button, ButtonGroup, Card, Grid } from "@mui/material";
 import { drawAwayTeam, drawHomeTeam } from "../utils/drawTeam";
 import TeamCard from "./TeamCard";
+
 const CurrentDraw = (props) => {
     const drawHomeTeamHandler = () => {
         const homeTeam = drawHomeTeam(props.teams.remainingTeams);
@@ -35,7 +36,6 @@ const CurrentDraw = (props) => {
         }
         props.onFixtureDraw(props.currHomeTeam, awayTeam);
     };
-
     return (
         <Grid container justifyContent="center" alignItems="center">
             <Grid item xs={12}>
