@@ -55,7 +55,7 @@ const CurrentDraw = (props) => {
                         backgroundRepeat: "no-repeat",
                         backgroundSize: "cover",
                         color: "white",
-                        height: "250px",
+                        maxHeight: "250px",
                     }}
                 >
                     <Grid container justifyContent="center" alignItems="center">

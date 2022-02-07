@@ -82,9 +82,9 @@ function App() {
                 sx={{ maxWidth: "75%", mx: "auto" }}
             >
                 <Grid item>
-                    <h1>UCL DRAW SIMULATOR</h1>
+                    <h1 className={styles.mainTitle}>UCL DRAW SIMULATOR</h1>
                 </Grid>
-                <Grid container xs={12} justifyContent="center">
+                <Grid container justifyContent="center">
                     {teamState.remainingTeams.length > 0 && (
                         <Stage
                             teamState={teamState}
@@ -93,7 +93,9 @@ function App() {
                         />
                     )}
                     <Grid item xs={12}>
-                        <Fixtures fixtures={fixtures} />
+                        {fixtures.length > 0 && (
+                            <Fixtures fixtures={fixtures} />
+                        )}
                     </Grid>
                     {teamState.remainingTeams.length === 0 && (
                         <Button variant="text" onClick={restartHandler}>

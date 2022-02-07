@@ -9,6 +9,11 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     color: white;
-    height: 100vh;
+    min-height: 100vh;
+
     font-family: "Gayathri", sans-serif;
+}
+
+.mainTitle {
+    text-align: center;
 }

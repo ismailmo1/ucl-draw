@@ -3,7 +3,6 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import styles from "./Fixtures.module.css";
 
 const Fixtures = (props) => {
-    console.log(props);
     return (
         <List>
             <Grid container justifyContent="center" alignItems="center">
@@ -30,15 +29,13 @@ const Fixtures = (props) => {
                                     margin: "auto",
                                 }}
                             >
-                                <Grid
-                                    container
-                                    xs={2}
-                                    justifyContent="flex-end"
-                                >
-                                    <Avatar
-                                        src={fixture.home.badge}
-                                        variant="square"
-                                    />
+                                <Grid item xs={2}>
+                                    <Grid container justifyContent="flex-end">
+                                        <Avatar
+                                            src={fixture.home.badge}
+                                            variant="square"
+                                        />
+                                    </Grid>
                                 </Grid>
                                 <Grid item xs={3}>
                                     {fixture.home.name.toUpperCase()}(H)
@@ -50,15 +47,13 @@ const Fixtures = (props) => {
                                 <Grid item xs={3}>
                                     {fixture.away.name.toUpperCase()}(A)
                                 </Grid>
-                                <Grid
-                                    container
-                                    xs={2}
-                                    justifyContent="flex-start"
-                                >
-                                    <Avatar
-                                        src={fixture.away.badge}
-                                        variant="square"
-                                    />
+                                <Grid item xs={2}>
+                                    <Grid container justifyContent="flex-start">
+                                        <Avatar
+                                            src={fixture.away.badge}
+                                            variant="square"
+                                        />
+                                    </Grid>
                                 </Grid>
                             </ListItem>
                         </CSSTransition>
