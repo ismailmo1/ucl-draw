@@ -1,12 +1,8 @@
-import FlagIcon from "@mui/icons-material/Flag";
-import GppGoodIcon from "@mui/icons-material/GppGood";
-import GroupsIcon from "@mui/icons-material/Groups";
-import LooksOneIcon from "@mui/icons-material/LooksOne";
-import LooksTwoIcon from "@mui/icons-material/LooksTwo";
-import { Grid, Tooltip } from "@mui/material";
+import { Grid } from "@mui/material";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import styles from "./RemainingTeams.module.css";
 import TeamCard from "./TeamCard";
+import ValidIcons from "./ValidIcons";
 
 const RemainingTeams = (props) => {
     let validTeams;
@@ -39,79 +35,7 @@ const RemainingTeams = (props) => {
                         height="50"
                         team={team}
                     >
-                        {props.homeTeam &&
-                            (team.validReasons && !team.validReasons.isValid ? (
-                                <Grid
-                                    container
-                                    justifyContent="center"
-                                    sx={{ flexWrap: "nowrap" }}
-                                >
-                                    {team.validReasons.sameGroup ? (
-                                        <Grid item>
-                                            <Tooltip
-                                                title={`Same Group: ${team.group}`}
-                                            >
-                                                <GroupsIcon
-                                                    sx={{
-                                                        color: "DarkRed",
-                                                        fontSize: "inherit",
-                                                    }}
-                                                />
-                                            </Tooltip>
-                                        </Grid>
-                                    ) : (
-                                        ""
-                                    )}
-                                    {team.validReasons.sameLeague ? (
-                                        <Grid item>
-                                            <Tooltip
-                                                title={`Same League: ${team.league}`}
-                                            >
-                                                <FlagIcon
-                                                    sx={{
-                                                        color: "DarkRed",
-                                                        fontSize: "inherit",
-                                                    }}
-                                                />
-                                            </Tooltip>
-                                        </Grid>
-                                    ) : (
-                                        ""
-                                    )}
-                                    {team.validReasons.samePosition ? (
-                                        <Grid item>
-                                            <Tooltip
-                                                title={`Same Position: ${team.finalPosition}`}
-                                            >
-                                                {team.finalPosition === 1 ? (
-                                                    <LooksOneIcon
-                                                        sx={{
-                                                            color: "DarkRed",
-                                                            fontSize: "inherit",
-                                                        }}
-                                                    />
-                                                ) : (
-                                                    <LooksTwoIcon
-                                                        sx={{
-                                                            color: "DarkRed",
-                                                            fontSize: "inherit",
-                                                        }}
-                                                    />
-                                                )}
-                                            </Tooltip>
-                                        </Grid>
-                                    ) : (
-                                        ""
-                                    )}
-                                </Grid>
-                            ) : (
-                                <GppGoodIcon
-                                    sx={{
-                                        color: "DarkGreen",
-                                        fontSize: "inherit",
-                                    }}
-                                />
-                            ))}
+                        {props.homeTeam && <ValidIcons team={team} />}
                     </TeamCard>
                 </Grid>
             </CSSTransition>
