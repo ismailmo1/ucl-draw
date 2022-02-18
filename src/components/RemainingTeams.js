@@ -1,3 +1,4 @@
+import NotListedLocationIcon from "@mui/icons-material/NotListedLocation";
 import { Grid } from "@mui/material";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import styles from "./RemainingTeams.module.css";
@@ -35,7 +36,16 @@ const RemainingTeams = (props) => {
                         height="50"
                         team={team}
                     >
-                        {props.homeTeam && <ValidIcons team={team} />}
+                        {props.homeTeam ? (
+                            <ValidIcons team={team} />
+                        ) : (
+                            <NotListedLocationIcon
+                                sx={{
+                                    color: "DarkGrey",
+                                    fontSize: "inherit",
+                                }}
+                            />
+                        )}
                     </TeamCard>
                 </Grid>
             </CSSTransition>
