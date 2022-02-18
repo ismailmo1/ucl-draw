@@ -1,6 +1,6 @@
+import NotListedLocationIcon from "@mui/icons-material/NotListedLocation";
 import { Grid } from "@mui/material";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import styles from "./RemainingTeams.module.css";
+import { motion } from "framer-motion";
 import TeamCard from "./TeamCard";
 import ValidIcons from "./ValidIcons";
 
@@ -17,28 +17,33 @@ const RemainingTeams = (props) => {
     }
     const teams = props.remainingTeams.map((team) => {
         return (
-            <CSSTransition
+            <Grid
+                item
+                xs={3}
+                md={1}
                 key={team.name}
-                timeout={500}
-                classNames={{
-                    enter: styles.remainingTeamEnter,
-                    enterActive: styles.remainingTeamEnterActive,
-                    exit: styles.remainingTeamExit,
-                    exitActive: styles.remainingTeamExitActive,
-                }}
+                component={motion.div}
+                layout={true}
             >
-                <Grid item xs={3} md={1} key={team.name}>
-                    <TeamCard
-                        invalid={
-                            validTeams && validTeamNames.indexOf(team.name) < 0
-                        }
-                        height="50"
-                        team={team}
-                    >
-                        {props.homeTeam && <ValidIcons team={team} />}
-                    </TeamCard>
-                </Grid>
-            </CSSTransition>
+                <TeamCard
+                    invalid={
+                        validTeams && validTeamNames.indexOf(team.name) < 0
+                    }
+                    height="50"
+                    team={team}
+                >
+                    {props.homeTeam ? (
+                        <ValidIcons team={team} />
+                    ) : (
+                        <NotListedLocationIcon
+                            sx={{
+                                color: "DarkGrey",
+                                fontSize: "inherit",
+                            }}
+                        />
+                    )}
+                </TeamCard>
+            </Grid>
         );
     });
     return (
@@ -55,9 +60,7 @@ const RemainingTeams = (props) => {
                 }}
                 wrap="nowrap"
             >
-                <TransitionGroup component={null} className="remainders">
-                    {teams}
-                </TransitionGroup>
+                {teams}
             </Grid>
         </>
     );

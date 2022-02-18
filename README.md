@@ -2,6 +2,8 @@
 
 React app to simulate a champions league draw and provide some insight on how the rules work.
 
+[Check out the live app here!](https://ucl-draw.web.app/)
+
 ![Site Screenshot](/screenshot.png "looks like an early exit for city again")
 
 ---

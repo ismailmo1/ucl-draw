@@ -1,5 +1,6 @@
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { Button, Grid } from "@mui/material";
+import { motion } from "framer-motion";
 import { useReducer, useState } from "react";
 import Fixtures from "./components/Fixtures";
 import Stage from "./components/Stage";
@@ -80,6 +81,8 @@ function App() {
                 container
                 justifyContent="center"
                 sx={{ maxWidth: "75%", mx: "auto" }}
+                component={motion.div}
+                layout={true}
             >
                 <Grid item>
                     <h1 className={styles.mainTitle}>UCL DRAW SIMULATOR</h1>

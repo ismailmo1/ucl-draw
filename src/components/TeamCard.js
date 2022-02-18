@@ -1,5 +1,5 @@
 import { Card, CardContent, CardMedia, Grid } from "@mui/material";
-import CSSTransition from "react-transition-group/CSSTransition";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
 import styles from "./TeamCard.module.css";
 
 const TeamCard = (props) => {
@@ -18,24 +18,15 @@ const TeamCard = (props) => {
                 margin: "5px",
             }}
         >
-            <CSSTransition
-                in={!!props.team}
-                timeout={500}
-                classNames={{
-                    enter: styles.teamBadgeEnter,
-                    enterActive: styles.teamBadgeEnterActive,
-                    exit: styles.teamBadgeExit,
-                    exitActive: styles.teamBadgeExitActive,
-                }}
-            >
+            <SwitchTransition mode="out-in">
                 <CSSTransition
-                    in={props.invalid}
+                    key={!!props.team}
                     timeout={500}
                     classNames={{
-                        enter: styles.teamValidEnter,
-                        enterActive: styles.teamValidEnterActive,
-                        exit: styles.teamValidExit,
-                        exitActive: styles.teamValidExitActive,
+                        enter: styles.teamBadgeEnter,
+                        enterActive: styles.teamBadgeEnterActive,
+                        exit: styles.teamBadgeExit,
+                        exitActive: styles.teamBadgeExitActive,
                     }}
                 >
                     <CardMedia
@@ -49,7 +40,7 @@ const TeamCard = (props) => {
                         }}
                     />
                 </CSSTransition>
-            </CSSTransition>
+            </SwitchTransition>
             {props.children && (
                 <CardContent>
                     <Grid container justifyContent="center" alignItems="center">

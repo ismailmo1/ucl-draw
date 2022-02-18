@@ -7,6 +7,7 @@ import { Grid, Tooltip } from "@mui/material";
 
 const ValidIcons = (props) => {
     return props.team.validReasons && !props.team.validReasons.isValid ? (
+        // team is invalid
         <Grid container justifyContent="center" sx={{ flexWrap: "nowrap" }}>
             {props.team.validReasons.sameGroup ? (
                 <Grid item>
@@ -63,6 +64,7 @@ const ValidIcons = (props) => {
             )}
         </Grid>
     ) : (
+        // team is valid
         <GppGoodIcon
             sx={{
                 color: "DarkGreen",
